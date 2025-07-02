@@ -4,26 +4,25 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace GoogleSearchTest;
+namespace BrowserTest
 {
-    [TestFixture]
     public class GoogleSearchTest
     {
         private IWebDriver driver;
-
-        [Setup]
+        
+        [SetUp]
         public void Setup()
         {
             driver = new ChromeDriver();
         }
-
+        
         [Test]
         public void GoogleTitleCheck()
         {
             driver.Navigate().GoToUrl("https://www.google.com");
-            Assert.assertEqual("Google", driver.Title);
+            Assert.That(driver.Title, Is.EqualTo("Google"));
         }
-
+        
         [TearDown]
         public void TearDown()
         {
