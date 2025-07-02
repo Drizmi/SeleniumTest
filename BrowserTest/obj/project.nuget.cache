@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "11mcixCdViQ=",
+  "dgSpecHash": "Lg0tiy8JOY0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Michael\\RiderProjects\\SeleniumTest\\BrowserTest\\BrowserTest.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Michael\\.nuget\\packages\\dotnetseleniumextras.pageobjects\\3.11.0\\dotnetseleniumextras.pageobjects.3.11.0.nupkg.sha512",
+    "C:\\Users\\Michael\\.nuget\\packages\\dotnetseleniumextras.pageobjects.core\\4.14.1\\dotnetseleniumextras.pageobjects.core.4.14.1.nupkg.sha512",
     "C:\\Users\\Michael\\.nuget\\packages\\microsoft.codecoverage\\17.14.1\\microsoft.codecoverage.17.14.1.nupkg.sha512",
     "C:\\Users\\Michael\\.nuget\\packages\\microsoft.net.test.sdk\\17.14.1\\microsoft.net.test.sdk.17.14.1.nupkg.sha512",
     "C:\\Users\\Michael\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.14.1\\microsoft.testplatform.objectmodel.17.14.1.nupkg.sha512",
@@ -12,6 +14,7 @@
     "C:\\Users\\Michael\\.nuget\\packages\\nunit\\4.4.0-beta.1\\nunit.4.4.0-beta.1.nupkg.sha512",
     "C:\\Users\\Michael\\.nuget\\packages\\selenium.support\\4.34.0\\selenium.support.4.34.0.nupkg.sha512",
     "C:\\Users\\Michael\\.nuget\\packages\\selenium.webdriver\\4.34.0\\selenium.webdriver.4.34.0.nupkg.sha512",
+    "C:\\Users\\Michael\\.nuget\\packages\\seleniumextras.waithelpers\\1.0.2\\seleniumextras.waithelpers.1.0.2.nupkg.sha512",
     "C:\\Users\\Michael\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",
     "C:\\Users\\Michael\\.nuget\\packages\\system.reflection.metadata\\8.0.0\\system.reflection.metadata.8.0.0.nupkg.sha512"
   ],
