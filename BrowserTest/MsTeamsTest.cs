@@ -2,8 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using System;
+using AventStack.ExtentReports;
 using BrowserTest.Pages;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -17,18 +16,29 @@ public class Tests
     static string name = "qa@safeticaservices.onmicrosoft.com";
     static string password = "automation.Safetica2004";
     static string filePath = "BrowserTest/SendMe.txt";
-    static string chattxtxpath = "//h1[normalize-space()='Chat']";
-    
-    string[] messages = {"message 1", "message 2", "message 3 !@#$%^"};
+    static string downloadFolder = "BrowserTest/Downloads";
     
     private IWebDriver _driver;
+    private ExtentReports _extent;
+    private Logger _logger;
 
     private ChatPage userLogin()
     {
-        LoginPage loginPage = new LoginPage(_driver);
+        LoginPage loginPage = new LoginPage(_driver, _logger);
         _driver.Navigate().GoToUrl(url);
         WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-        Assert.That(wait.Until(ExpectedConditions.UrlContains(url)), "Login failed");
+        try
+        {
+            Assert.That(wait.Until(ExpectedConditions.UrlContains(url)));
+            _logger.testInfo("Url is correct");
+            _logger.testPass("Login page is opened");
+        }
+        catch (Exception e)
+        {
+            _logger.testFail(e, "");
+        }
+
+        //TODO part logging here too
         return loginPage.login(name, password);
     }
 
@@ -36,29 +46,63 @@ public class Tests
     public void Setup()
     {
         _driver = new ChromeDriver();
+        _extent = new ExtentReports();
+        _logger = new Logger(_driver, _extent);
     }
     
     [Test]
     public void LoginTest()
     {
-        userLogin().assertUser(name);
+        string testName = "LoginTest";
+        _logger.testStart(testName);
+        try
+        {
+            userLogin().assertUser(name);
+            _logger.testPass("Login successful");
+        } catch (Exception e)
+        {
+            _logger.testFail(e, "");
+            Assert.Fail(e.Message);
+        }
     }
 
     [Test]
     public void FileExchangeTest()
     {
-        ChatPage chatPage = userLogin();
-        
+        string testName = "FileExchangeTest";
+        _logger.testStart(testName);
+        try
+        {
+            ChatPage chatPage = userLogin();
+            chatPage.openChat();
+            chatPage.SendFile(filePath);
+            chatPage.DownloadFileFromLastMessage(filePath);
+        }
+        catch (Exception e)
+        {
+            _logger.testFail(e, "");
+            Assert.Fail(e.Message);
+        }
     }
 
     [Test]
     public void SendMessagesTest()
     {
-        ChatPage chatPage = userLogin();
-        chatPage.openChat();
-        foreach (string message in messages)
+        string testName = "SendMessagesTest";
+        _logger.testStart(testName);
+        try
         {
-            chatPage.SendMessage(message);
+            ChatPage chatPage = userLogin();
+            chatPage.openChat();
+            for (int i = 0; i < 3; i++)
+            {
+                chatPage.SendMessage();
+                _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(300);
+            }
+        } catch (Exception e)
+        {
+            _logger.testFail(e, "");
+            Assert.Fail(e.Message);
         }
     }
 
