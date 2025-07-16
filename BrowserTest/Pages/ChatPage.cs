@@ -116,6 +116,7 @@ public class ChatPage
             attachfilebtn.Click();
             uplooadfromdevicebtn.Click();
             //TODO select file to be uploaded from the popup
+            //TODO can send string to the element
         } catch (Exception e)
         {
             _logger.testFail(e, "");
